@@ -1,5 +1,6 @@
 package com.amm.gulimall.order.controller;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -29,6 +30,16 @@ import com.amm.common.utils.R;
 public class OrderController {
     @Autowired
     private OrderService orderService;
+
+    @RequestMapping("/member/list")
+    public R memberOrders(){
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setMemberUsername("李斯");
+        orderEntity.setCouponAmount(new BigDecimal(100));
+        orderEntity.setCouponId(1L);
+        orderEntity.setOrderSn("订单号:25440");
+        return R.ok().put("order",orderEntity);
+    }
 
     /**
      * 列表

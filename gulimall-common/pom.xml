@@ -69,9 +69,15 @@
             <version>3.0.0</version>
             <scope>compile</scope>
         </dependency>
+        <!--服务的注册与发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!--配置中心-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

@@ -3,6 +3,8 @@ package com.amm.gulimall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.amm.gulimall.member.Feign.CouponFeignService;
+import com.amm.gulimall.member.Feign.OrderFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,29 @@ import com.amm.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private CouponFeignService couponFeignService;
+    @Autowired
+    private OrderFeignService orderFeignService;
+
+
+    @RequestMapping("/coupons")
+    public R coupons(){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setUsername("我是张张三");
+        R coupons = couponFeignService.memberCoupons();
+        return R.ok().put("会员名:",memberEntity.getUsername()).put("coupons:",coupons.get("coupons"));
+
+    }
+    @RequestMapping("/order/list")
+    public R orders(){
+        MemberEntity member = new MemberEntity();
+        member.setUsername("李斯");
+        R orders = orderFeignService.memberOrders();
+
+        return  R.ok().put("会员名字: ",member).put("订单详情: ",orders);
+
+    }
 
     /**
      * 列表

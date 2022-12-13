@@ -19,9 +19,9 @@ public class GulimallProductApplicationTests {
     BrandService brandService;
 
     @Test
-   public void addBrandentity() {
+    public void addBrandentity() {
         BrandEntity brandEntity = new BrandEntity();
-       // brandEntity.setName("苹果");
+        // brandEntity.setName("苹果");
         //brandService.save(brandEntity);
      /*   brandEntity.setBrandId(1L);
         brandEntity.setDescript("美国有苹果 , 中国有菠萝 菠萝手机");
@@ -30,7 +30,7 @@ public class GulimallProductApplicationTests {
 /*        for (BrandEntity entity : brand_id) {
             System.out.println(entity);
         }*/
-        brand_id.forEach((entity)->{
+        brand_id.forEach((entity) -> {
             System.out.println(entity);
         });
     }

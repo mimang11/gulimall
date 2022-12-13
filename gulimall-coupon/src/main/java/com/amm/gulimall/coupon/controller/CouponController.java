@@ -1,9 +1,12 @@
 package com.amm.gulimall.coupon.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,19 +27,36 @@ import com.amm.common.utils.R;
  * @email 123@gmail.com
  * @date 2022-12-11 20:45:14
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
 
+    @Value("${coupon.name}")
+    String name;
+
+    @Value("${coupon.age}")
+    String age;
+
+    @RequestMapping("/test")
+    R testConfig(){
+        return R.ok().put("name",name).put("age",age);
+    }
     /**
      *
      * @return
      * @author 陈十一
-     * @description 会员查询所有的
+     * @description 会员查询自己全部优惠劵
      * @date 2022/12/12 21:21
      */
+    @RequestMapping("/member/list")
+    public R memberCoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100-99");
+        return R.ok().put("coupons",Arrays.asList(couponEntity));
+    }
 
     /**
      * 列表
