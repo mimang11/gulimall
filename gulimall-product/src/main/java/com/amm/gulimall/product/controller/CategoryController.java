@@ -1,6 +1,7 @@
 package com.amm.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,16 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 列表
+     * 查出所有的分类以及子分类,以树形结构组装起来
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/tree")
     //@RequiresPermissions("product:category:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
+    public R list(){
+          List<CategoryEntity> entityList=  categoryService.listWitchTree();
 
-        return R.ok().put("page", page);
+      //  PageUtils page = categoryService.queryPage(params);
+
+        return R.ok().put("data", entityList);
     }
 
 
@@ -77,11 +80,16 @@ public class CategoryController {
 
     /**
      * 删除
+     * RequestBody获取请求体,只有post请求才有请求体
+     * springmvc会自动将{json}转为对应的对象
      */
     @RequestMapping("/delete")
     //@RequiresPermissions("product:category:delete")
     public R delete(@RequestBody Long[] catIds){
 		categoryService.removeByIds(Arrays.asList(catIds));
+
+        //1实际业务中不能随便删除 需要判断有没有被其他使用
+        categoryService.removeMenuByIds(Arrays.asList(catIds));
 
         return R.ok();
     }

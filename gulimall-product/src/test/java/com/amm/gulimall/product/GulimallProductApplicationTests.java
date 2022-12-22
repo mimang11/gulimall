@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,6 +35,29 @@ public class GulimallProductApplicationTests {
         brand_id.forEach((entity) -> {
             System.out.println(entity);
         });
+    }
+
+    @Test
+    public void testSteam(){
+        //测试steam流的filter过滤器结果为null时还能走下去吗
+
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("喜羊羊");
+        strings.add("灰太狼");
+        strings.add("沸羊羊");
+        strings.add("暖洋洋");
+        strings.add("村长");
+
+        List<String> stringList = strings.stream().filter((item) -> {
+            return item.equals("懒洋洋");
+        }).map((item)->{
+            System.out.println(item);
+            return item;
+        }).sorted((n1,n2)->{
+            System.out.println("1111");
+            return 1;
+        }).collect(Collectors.toList());
+        System.out.println(stringList.toString());
     }
 
 
