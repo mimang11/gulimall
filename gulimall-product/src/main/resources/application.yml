@@ -3,8 +3,8 @@ server:
 spring:
   datasource:
     username: root
-    password: root
-    url: jdbc:mysql://192.168.11.112:3306/gulimall-pms?userUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    password: qq121212
+    url: jdbc:mysql://192.168.11.112:3306/gulimall_pms?useSSL=false&userUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     #注意修改服务名
@@ -22,4 +22,4 @@ mybatis-plus:
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
 logging:
   level:
-    com.amm.gulimall: error
+    com.amm.gulimall: debug
